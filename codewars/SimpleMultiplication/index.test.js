@@ -1,7 +1,7 @@
 const simpleMultiplication = require("./index.js");
 
 test("should return an even number ", () => {
-  expect(simpleMultiplication(2)).toBe(16);
+  expect(simpleMultiplication(4)).toBe(32);
 });
 
 test("should return an odd number", () => {
