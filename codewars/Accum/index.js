@@ -7,6 +7,9 @@
 // The parameter of accum is a string which includes only letters from a..z and A..Z.
 
 function accum(s) {
-  // your code
+  return s
+    .split("")
+    .map((letter, i) => letter.toUpperCase() + letter.toLowerCase().repeat(i))
+    .join("-");
 }
 module.exports = accum;
