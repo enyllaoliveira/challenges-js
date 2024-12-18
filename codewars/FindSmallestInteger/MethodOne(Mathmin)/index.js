@@ -7,6 +7,8 @@
 // You can assume, for the purpose of this kata, that the supplied array will not be empty.
 
 function findSmallestInt(arr) {
-  //your code here
-  return 0;
+  const smallestInt = Math.min(...arr);
+  return smallestInt;
 }
+
+module.exports = findSmallestInt;
