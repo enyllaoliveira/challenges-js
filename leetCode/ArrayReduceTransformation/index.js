@@ -5,3 +5,17 @@
 // If the length of the array is 0, the function should return init.
 
 // Please solve it without using the built-in Array.reduce method.
+
+function reduce(nums, fn, init) {
+  let initialValue = init;
+
+  for (let i = 0; i < nums.length; i++) {
+    initialValue = fn(initialValue, nums[i]);
+  }
+
+  return initialValue;
+
+  ArrayReduceTransformation;
+}
+
+module.exports = reduce;
