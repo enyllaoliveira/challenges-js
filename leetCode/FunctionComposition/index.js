@@ -5,3 +5,15 @@
 // The function composition of an empty list of functions is the identity function f(x) = x.
 
 // You may assume each function in the array accepts one integer as input and returns one integer as output.
+
+function compose(functions) {
+  return function (x) {
+    let newFunctionComposition = x;
+    for (let i = functions.length - 1; i >= 0; i--) {
+      newFunctionComposition = functions[i](newFunctionComposition);
+    }
+    return newFunctionComposition;
+  };
+}
+
+module.exports = compose;
