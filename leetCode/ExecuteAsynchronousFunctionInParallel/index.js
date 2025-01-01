@@ -5,3 +5,32 @@
 // promise rejects:
 // When any of the promises returned from functions were rejected. promise should also reject with the reason of the first rejection.
 // Please solve it without using the built-in Promise.all function.
+
+function promiseAll(functions) {
+  return new Promise((resolve, reject) => {
+    if (functions.length === 0) {
+      resolve([]);
+      return;
+    }
+
+    const results = [];
+    let completedPromises = 0;
+
+    functions.forEach((fn, i) => {
+      fn()
+        .then((value) => {
+          results[i] = value;
+          completedPromises++;
+
+          if (completedPromises === functions.length) {
+            resolve(results);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  });
+}
+
+module.exports = promiseAll;
