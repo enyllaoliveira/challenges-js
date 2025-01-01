@@ -5,3 +5,20 @@
 // sum accepts two integers a and b and returns a + b. Assume that if a value has already been cached for the arguments (b, a) where a != b, it cannot be used for the arguments (a, b). For example, if the arguments are (3, 2) and (2, 3), two separate calls should be made.
 // fib accepts a single integer n and returns 1 if n <= 1 or fib(n - 1) + fib(n - 2) otherwise.
 // factorial accepts a single integer n and returns 1 if n <= 1 or factorial(n - 1) * n otherwise.
+
+function memoize(fn) {
+  const cache = new Map();
+  return function (...args) {
+    const uniqueKey = JSON.stringify(args);
+
+    if (cache.has(uniqueKey)) {
+      return cache.get(uniqueKey);
+    }
+
+    const resultMap = fn(...args);
+    cache.set(uniqueKey, resultMap);
+    return resultMap;
+  };
+}
+
+module.exports = memoize;
