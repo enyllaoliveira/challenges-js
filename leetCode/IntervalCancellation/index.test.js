@@ -1,21 +1,43 @@
 const cancellable = require("./index.js");
 
-test("should execute function after delay if not cancelled", () => {
-  jest.useFakeTimers();
-  const mockFn = jest.fn();
+describe("cancellable", () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
 
-  const cancelFn = cancellable(mockFn, [1, 2, 3], 1000);
+  afterEach(() => {
+    jest.useRealTimers();
+  });
 
-  jest.advanceTimersByTime(1000);
-  expect(mockFn).toHaveBeenCalledWith(1, 2, 3);
-});
+  test("should execute function immediately and at intervals", () => {
+    const mockFn = jest.fn();
 
-test("should cancel function execution if cancelled", () => {
-  jest.useFakeTimers();
-  const mockFn = jest.fn();
+    const cancelFn = cancellable(mockFn, [1, 2, 3], 1000);
 
-  const cancelFn = cancellable(mockFn, [1, 2, 3], 1000);
-  cancelFn();
-  jest.advanceTimersByTime(1000);
-  expect(mockFn).not.toHaveBeenCalled();
+    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn).toHaveBeenCalledWith(1, 2, 3);
+
+    jest.advanceTimersByTime(1000);
+    expect(mockFn).toHaveBeenCalledTimes(2);
+
+    jest.advanceTimersByTime(2000);
+    expect(mockFn).toHaveBeenCalledTimes(4);
+
+    cancelFn();
+    jest.advanceTimersByTime(1000);
+
+    expect(mockFn).toHaveBeenCalledTimes(4);
+  });
+
+  test("should cancel function execution before the first interval", () => {
+    const mockFn = jest.fn();
+
+    const cancelFn = cancellable(mockFn, [1, 2, 3], 1000);
+
+    cancelFn();
+    jest.advanceTimersByTime(1000);
+
+    expect(mockFn).toHaveBeenCalledTimes(1);
+    expect(mockFn).toHaveBeenCalledWith(1, 2, 3);
+  });
 });
