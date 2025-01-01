@@ -32,3 +32,16 @@
 // const cancelFn = cancellable((x1, x2) => x1 * x2, [2,4], 30);
 // setTimeout(cancelFn, cancelTimeMs);
 // The cancellation was scheduled to occur after a delay of cancelTimeMs (100ms), which happened after the execution of fn(2,4) at 30ms.
+
+function cancellable(fn, args, t) {
+  let timeOut;
+
+  timeOut = setTimeout(() => {
+    fn(...args);
+  }, t);
+  return function clearTimeOutFn() {
+    clearTimeout(timeOut);
+  };
+}
+
+module.exports = cancellable;
