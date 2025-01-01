@@ -8,11 +8,11 @@
 
 function compose(functions) {
   return function (x) {
-    let newFunctionComposition = x;
+    let result = x;
     for (let i = functions.length - 1; i >= 0; i--) {
-      newFunctionComposition = functions[i](newFunctionComposition);
+      result = functions[i](result);
     }
-    return newFunctionComposition;
+    return result;
   };
 }
 
