@@ -14,3 +14,10 @@
 // Input: millis = 200
 // Output: 200
 // Explanation: It should return a promise that resolves after 200ms.
+
+async function sleep(millis) {
+  return new Promise((res) => {
+    setTimeout(res, millis);
+  });
+}
+module.exports = sleep;
