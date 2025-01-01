@@ -17,3 +17,7 @@
 // argumentsLength({}, null, "3"); // 3
 
 // Three values were passed to the function so it should return 3.
+
+function argumentsLength(...args) {
+  return args.length;
+}
