@@ -81,7 +81,7 @@ function cancellable(fn, args, t) {
     fn(...args);
   }, t);
   return function clearTimeOutFn() {
-    clearTimeout(intervalTime);
+    clearInterval(intervalTime);
   };
 }
 
