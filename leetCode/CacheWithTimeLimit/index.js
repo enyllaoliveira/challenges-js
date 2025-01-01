@@ -34,3 +34,45 @@
 // At t=140, key=1 expires.
 // At t=200, get(1) is called but the cache is empty so -1 is returned.
 // At t=250, count() returns 0 because the cache is empty.
+
+class TimeLimitedCache {
+  constructor() {
+    this.cache = new Map();
+  }
+
+  set(key, value, duration) {
+    const now = Date.now();
+    const expiration = now + duration;
+    const exists = this.cache.has(key) && this.cache.get(key).expiration > now;
+
+    this.cache.set(key, { value, expiration });
+
+    return exists;
+  }
+
+  get(key) {
+    const now = Date.now();
+    const entry = this.cache.get(key);
+
+    if (entry && entry.expiration > now) {
+      return entry.value;
+    }
+
+    this.cache.delete(key);
+    return -1;
+  }
+
+  count() {
+    const now = Date.now();
+
+    for (const [key, entry] of this.cache) {
+      if (entry.expiration <= now) {
+        this.cache.delete(key);
+      }
+    }
+
+    return this.cache.size;
+  }
+}
+
+module.exports = TimeLimitedCache;
