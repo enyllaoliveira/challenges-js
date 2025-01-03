@@ -16,3 +16,4 @@ var isEmpty = function (obj) {
   }
   return false;
 };
+module.exports = isEmpty;
