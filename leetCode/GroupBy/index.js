@@ -25,3 +25,18 @@
 // The selector function gets the "id" out of each item in the array.
 // There are two objects with an "id" of 1. Both of those objects are put in the first array.
 // There is one object with an "id" of 2. That object is put in the second array.
+
+Array.prototype.groupBy = function (fn) {
+  const grouped = {};
+
+  for (const item of this) {
+    const key = fn(item);
+
+    if (!grouped[key]) {
+      grouped[key] = [];
+    }
+    grouped[key].push(item);
+  }
+  return grouped;
+};
+module.exports = Array.prototype.groupBy;
