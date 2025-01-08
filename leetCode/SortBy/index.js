@@ -6,3 +6,13 @@
 // Input: arr = [5, 4, 1, 2, 3], fn = (x) => x
 // Output: [1, 2, 3, 4, 5]
 // Explanation: fn simply returns the number passed to it so the array is sorted in ascending order.
+
+function sortBy(arr, fn) {
+  let sortedArr = [...arr];
+
+  sortedArr.sort((a, b) => fn(a) - fn(b));
+
+  return sortedArr;
+}
+
+module.exports = sortBy;
