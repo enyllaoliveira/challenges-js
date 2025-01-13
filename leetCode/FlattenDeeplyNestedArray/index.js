@@ -14,3 +14,23 @@
 
 // Explanation
 // Passing a depth of n=0 will always result in the original array. This is because the smallest possible depth of a subarray (0) is not less than n=0. Thus, no subarray should be flattened.
+
+function flat(arr, n) {
+  const flattened = (array, depth) => {
+    let result = [];
+
+    for (const element of array) {
+      if (Array.isArray(element) && depth < n) {
+        result = result.concat(flattened(element, depth + 1));
+      } else {
+        result.push(element);
+      }
+    }
+
+    return result;
+  };
+
+  return flattened(arr, 0);
+}
+
+module.exports = flat;
