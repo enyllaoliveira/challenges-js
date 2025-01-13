@@ -7,3 +7,18 @@
 // Input: obj = [null, 0, false, 1]
 // Output: [1]
 // Explanation: All falsy values have been removed from the array.
+
+var compactObject = function (obj) {
+  if (typeof obj !== "object" || obj === null) return obj;
+
+  if (Array.isArray(obj)) return obj.filter(Boolean).map(compactObject);
+
+  const result = {};
+  for (const key in obj) {
+    if (Boolean(obj[key])) {
+      result[key] = compactObject(obj[key]);
+    }
+  }
+  return result;
+};
+module.exports = compactObject;
