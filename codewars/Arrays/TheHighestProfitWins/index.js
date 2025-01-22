@@ -22,3 +22,4 @@ function minMax(arr) {
 
   return [min, max];
 }
+module.exports = minMax;
