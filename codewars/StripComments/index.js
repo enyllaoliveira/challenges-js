@@ -10,9 +10,8 @@
 
 function solution(text, markers) {
     return text.split("\n")
-      .map(l =>   markers.reduce((accum, marker) => accum.split(marker)[0], l)
-      .trimEnd())
-      .join("\n") + (text.endsWith("\n") ? "\n" : "");
-}
+      .map(l => markers.reduce((accum, marker) => accum.split(marker)[0], l).trimEnd() || "") 
+      .join("\n"); 
+  }
 
 module.exports = solution;
