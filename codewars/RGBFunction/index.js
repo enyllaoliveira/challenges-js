@@ -10,3 +10,14 @@ function rgb(r, g, b) {
       .map(n => ("00" + n.toString(16)).slice(-2).toUpperCase()).join('')
       return rgb;
 }
+
+// or
+// function rgb(r, g, b) {
+  
+//     limit = n => Math.max(0, Math.min(255, n))
+    
+//     return [limit(r), limit(g), limit(b)]
+//       .map(n => n.toString(16).padStart(2, '0').toUpperCase()).join('')
+//       return rgb;
+// padStart - preencher uma string com caracteres adicionais à esquerda até chegar a um certo tamanho .
+// }
