@@ -7,3 +7,12 @@
 // The code would be called like so:
 // var result = solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"])
 // // result should == "apples, pears\ngrapes\nbananas"
+
+function solution(text, markers) {
+    return text.split("\n")
+      .map(l =>   markers.reduce((accum, marker) => accum.split(marker)[0], l)
+      .trimEnd())
+      .join("\n") + (text.endsWith("\n") ? "\n" : "");
+}
+
+module.exports = solution;
