@@ -11,6 +11,8 @@ function rgb(r, g, b) {
       return rgb;
 }
 
+module.exports = rgb;
+
 // or
 // function rgb(r, g, b) {
   
